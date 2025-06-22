@@ -29,16 +29,16 @@ class WorkController extends Controller
      */
     public function store(Work $job)
     {
-        return view('job.show', compact('job'));
+        //
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Work $job)
     {
-        //
+        return view('job.show', compact('job'));
     }
 
     /**
