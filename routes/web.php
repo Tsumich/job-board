@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('', fn() => to_route('jobs.index'));
+
+Route::resource('jobs', WorkController::class) 
+    ->only(['index', 'show']);
+
