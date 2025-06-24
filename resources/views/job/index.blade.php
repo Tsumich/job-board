@@ -8,14 +8,25 @@
                 <div>
                     <div class="mb-1 font-semibold">Поиск</div>
                     {{-- : используется перед параметром если мы хотим передать функцию --}}
-                    <x-text-input name='search' value='' placeholder='по названию'></x-text-input>
+                    <x-text-input name='search' value="{{request('search')}}" placeholder='по названию'></x-text-input>
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Зарплата</div>
                     <div class="flex space-x-2">
-                        <x-text-input name='min_salary' value='' placeholder='От'></x-text-input>
-                        <x-text-input name='max_salary' value='' placeholder='До'></x-text-input>
+                        {{-- value хранит значение с пред request --}}
+                        <x-text-input name='min_salary' value="{{request('min_salary')}}" placeholder='От'></x-text-input>
+                        <x-text-input name='max_salary' value="{{request('max_salary')}}" placeholder='До'></x-text-input>
                     </div>
+                </div>
+                <div>
+                    <div class="mb-1 font-semibold">Опыт</div>
+                    <x-radio-group name='expirience'
+                        :options='array_combine(array_map("ucfirst",  \App\Models\Work::$expirience), \App\Models\Work::$expirience)'/>
+                </div>
+                <div>
+                    <div class="mb-1 font-semibold">Тэги</div>
+                    <x-radio-group name='category' 
+                        :options='array_combine(array_map("ucfirst",  \App\Models\Work::$category), \App\Models\Work::$category)'/>
                 </div>
             </div>
             {{-- в query подставятся значение из инпутов--}}
