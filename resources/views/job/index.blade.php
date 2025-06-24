@@ -3,19 +3,19 @@
         :links="['Jobs' => route('jobs.index')]"/>
     {{-- Фильтр заимствующий компонент с карточкой для работы --}}
     <x-card class="mb-4 text-sm">
-        <form action="{{route('jobs.index')}}" method="GET">
+        <form id="filteringForm" action="{{route('jobs.index')}}" method="GET">
             <div class="mb-4 grid grid-cols-2 gap-4">
                 <div>
                     <div class="mb-1 font-semibold">Поиск</div>
                     {{-- : используется перед параметром если мы хотим передать функцию --}}
-                    <x-text-input name='search' value="{{request('search')}}" placeholder='по названию'></x-text-input>
+                    <x-text-input name='search' value="{{request('search')}}" form-id='filteringForm' placeholder='по названию'></x-text-input>
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Зарплата</div>
                     <div class="flex space-x-2">
                         {{-- value хранит значение с пред request --}}
-                        <x-text-input name='min_salary' value="{{request('min_salary')}}" placeholder='От'></x-text-input>
-                        <x-text-input name='max_salary' value="{{request('max_salary')}}" placeholder='До'></x-text-input>
+                        <x-text-input name='min_salary' value="{{request('min_salary')}}"  form-id='filteringForm' placeholder='От'></x-text-input>
+                        <x-text-input name='max_salary' value="{{request('max_salary')}}"  form-id='filteringForm' placeholder='До'></x-text-input>
                     </div>
                 </div>
                 <div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             {{-- в query подставятся значение из инпутов--}}
-            <button class="w-full">Показать</button>
+            <x-button class="w-full">Показать</x-button>
         </form>
     </x-card>
 
