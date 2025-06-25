@@ -16,7 +16,9 @@ class TextInput extends Component
         public ?string $name = null, 
         public ?string $placeholder = null, 
         // нужно ли отображать крестик на импуте или нет
+        public ?string $formRef = null,
         public ?string $formId = null,
+
     )
     {
         
