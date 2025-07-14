@@ -18,7 +18,7 @@ class TextInput extends Component
         // нужно ли отображать крестик на импуте или нет
         public ?string $formRef = null,
         public ?string $formId = null,
-
+        public ?string $type = 'text',
     )
     {
         
