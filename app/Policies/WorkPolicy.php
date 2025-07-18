@@ -65,6 +65,7 @@ class WorkPolicy
     }
 
     public function apply(User $user, Work $work):bool{
-        return false;
+        // предотвращает повторный apply
+        return !$work -> hasUserApplies($user);
     }
 }
