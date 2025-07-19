@@ -8,7 +8,7 @@
         
         @can('apply', $job)
             <x-link-button :href="route('job.application.create', $job)">
-                Создать вакансию
+                Apply
             </x-link-button>
             @else
             <div class="text-center text-sm font-medium text-gray-500">

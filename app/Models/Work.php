@@ -31,9 +31,9 @@ class Work extends Model
     public function hasUserApplies(Authenticatable|User|int $user):bool{
         return $this->where('id', $this->id)
             ->whereHas(
-                'jobApplications',
+                'jobApplication',
                 fn($query) => $query->where('user_id', '=', $user->id ?? $user)
-            )->exist();
+            )->exists();
     }
 
     public function scopeFilter(Builder | QueryBuilder $query, array $filters):Builder | QueryBuilder{
