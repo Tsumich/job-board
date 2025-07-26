@@ -21,11 +21,25 @@
                         Средняя запрашиваемая ЗП ${{ number_format($application->work->job_application_avg_expected_salary)}}
                     </div>
                 </div> 
-                <div></div>
+                <div>
+                    <form action='{{ route('my-job-applications.destroy', $application)}}' method="POST">
+                        @csrf
+                        @method("DELETE")
+                        <x-button>Удалить</x-button>
+                    </form>
+                </div> 
             </div>
         </x-job-card>
     @empty
-
+        <div class="rounded-md border border-dashed border-slate-300 p-8">
+            <div class="text-center font-medium">
+                нет вакансий
+            </div>
+            <div class="text-center">
+                <a class="text-indigo-500 hover:underline"
+                href="{{route('jobs.index')}}">here</a>
+            </div>
+        </div>
     @endforelse
 
 </x-layout>

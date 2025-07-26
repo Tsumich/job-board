@@ -11,7 +11,7 @@ class JobApplication extends Model
     /** @use HasFactory<\Database\Factories\JobApplicationFactory> */
     use HasFactory;
 
-    protected $fillable = ['expected_salary', 'user_id', 'work_id'];
+    protected $fillable = ['expected_salary', 'user_id', 'work_id', 'cv_path'];
 
     public function work():BelongsTo
     {

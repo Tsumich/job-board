@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobApplication;
+use Illuminate\Contracts\Queue\Job;
 use Illuminate\Support\Facades\Auth;
 
 class MyJobApplicationController extends Controller
@@ -24,9 +26,13 @@ class MyJobApplicationController extends Controller
         );
     }
 
-   
-    public function destroy(string $id)
+   // переменная должна называться myJobApplication
+    public function destroy(JobApplication $myJobApplication)
     {
-        //
+        $myJobApplication->delete();
+        return redirect()->back()->with(
+            'success',
+            'Job application removed'
+        );
     }
 }
