@@ -20,6 +20,10 @@ class Work extends Model
         return $this->belongsTo(Employer::class);
     }
 
+    protected $fillable = [
+        'title', 'location', 'salary', 'description', 'expirience', 'category'
+    ];
+
     public static array $expirience = ['entry', 'intermediate', 'senior'];
     public static array $category = ['IT', 'Finance', 'Sales', 'Marketing'];
 

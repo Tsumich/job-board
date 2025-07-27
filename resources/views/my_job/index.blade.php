@@ -1,3 +1,5 @@
 <x-layout>
-    aaa
+    <x-card>
+        my jobs index
+    </x-card>
 </x-layout>

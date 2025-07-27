@@ -30,7 +30,7 @@ class EmployerController extends Controller
         // созданный работник будет ассоироваться с юзером
         $request->user()->employer()->create(
             $request->validate([
-                'company_name' => 'required|min:3|unique|employers,company_name'
+                'company_name' => 'required|min:3|unique:employers,company_name'
             ])
         );
         return redirect()->route('jobs.index')

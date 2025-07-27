@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Work;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 
 class MyJobController extends Controller
 {
-    
+    use HasFactory;
+
+    protected $fillable = [
+        'title', 'location', 'salary', 'description', 'expirience', 'category'
+    ];
 
     public function index()
     {
@@ -19,7 +25,7 @@ class MyJobController extends Controller
      */
     public function create()
     {
-        //
+        return view('my_job.create');
     }
 
     /**
@@ -27,7 +33,23 @@ class MyJobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        error_log('111dfgdfg');
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'salary' => 'required|numeric|max:5000',
+            'description' => 'required|string',
+            'expirience' => 'required|in:' . implode(',', Work::$expirience),
+            'category' => 'required|in:' . implode(',', Work::$category),
+        ]);
+error_log('dfgdfg');
+        $request->user()->employer->works()->create($validatedData);
+
+        return redirect()->route('my-jobs.index')->with(
+            'success',
+            'Job created'
+        );
     }
 
     /**

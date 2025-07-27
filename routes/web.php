@@ -36,10 +36,10 @@ Route::resource('my-job-applications', MyJobApplicationController::class)
 
 Route::resource('employer', EmployerController::class)
     ->only(['create', 'store'])
-    ->middleware('auth')
-    ;
+    ->middleware('auth');
 
     
 Route::resource('my-jobs', MyJobController::class)
-->middleware('my-jobs');
+    ->only(['store', 'create', 'index'])
+    ->middleware('my-jobs');
 ;

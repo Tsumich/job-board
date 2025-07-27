@@ -19,7 +19,7 @@ class WorkController extends Controller
             'search', 'min_salary', 'max_salary', 'expirience', 'category'
         );
 
-        return view('job.index', ['jobs' => Work::with('employer')->filter($filters)->get()]);
+        return view('job.index', ['jobs' => Work::with('employer')->latest()->filter($filters)->get()]);
     }
 
     /**
