@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WorkRequest;
 use App\Models\Work;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
@@ -15,9 +16,13 @@ class MyJobController extends Controller
         'title', 'location', 'salary', 'description', 'expirience', 'category'
     ];
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('my_job.index');
+        return view('my_job.index', [
+            'works' => request()->user()->employer->works()
+            ->with(['employer', 'jobApplication', 'jobApplication.user'])
+            ->get()
+        ]);
     }
 
     /**
@@ -31,20 +36,10 @@ class MyJobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(WorkRequest $request)
     {
-        error_log('111dfgdfg');
 
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'salary' => 'required|numeric|max:5000',
-            'description' => 'required|string',
-            'expirience' => 'required|in:' . implode(',', Work::$expirience),
-            'category' => 'required|in:' . implode(',', Work::$category),
-        ]);
-error_log('dfgdfg');
-        $request->user()->employer->works()->create($validatedData);
+        $request->user()->employer->works()->create($request->validated());
 
         return redirect()->route('my-jobs.index')->with(
             'success',
@@ -52,28 +47,21 @@ error_log('dfgdfg');
         );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Work $myJob)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return view('my_job.edit', ['work' => $myJob]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(WorkRequest $request, Work $myJob)
     {
-        //
+        $myJob->update($request->validated());
+        return redirect()->route('my-jobs.index')->with(
+            'success',
+            'Job created'
+        );
     }
 
     /**

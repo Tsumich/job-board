@@ -40,6 +40,5 @@ Route::resource('employer', EmployerController::class)
 
     
 Route::resource('my-jobs', MyJobController::class)
-    ->only(['store', 'create', 'index'])
-    ->middleware('my-jobs');
+     ->middleware('my-jobs');
 ;
